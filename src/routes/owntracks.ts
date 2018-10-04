@@ -1,5 +1,4 @@
 import { Router } from 'express'
-import * as moment from 'moment'
 
 import db from '../db/models'
 
