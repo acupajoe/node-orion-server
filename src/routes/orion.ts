@@ -60,12 +60,14 @@ router.post('/locations', cors(corsOptions), async (req, res, next) => {
   const limit: number = req.body.limit ? parseInt(req.body.limit) : 2500
   const timestampStart: any = req.body.timestamp_start ? new Date(req.body.timestamp_start * 1000) : moment().subtract(1, 'month').toDate()
   const timestampEnd: any = req.body.timestamp_end ? new Date(req.body.timestamp_end * 1000) : moment().toDate()
+  const fields = req.body.fields
 
   if (!user || !device)
     return res.status(401).json({ status: 'error', message: `Invalid parameters: user [${user}, device [${device}]` })
 
   try {
     const locations = await db.Location.findAll({
+      attributes: fields,
       where: {
         user: user,
         device: device,
