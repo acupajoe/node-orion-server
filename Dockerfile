@@ -1,4 +1,5 @@
 FROM node:8-alpine
+LABEL maintainer="Joseph Schultz <joseph@acupajoe.io>"
 
 WORKDIR /app
 
@@ -9,4 +10,6 @@ RUN yarn
 
 COPY . .
 
-CMD [ "yarn", "start" ]
+ENV NODE_ENV production
+
+CMD ./node_modules/.bin/sequelize db:migrate && yarn start

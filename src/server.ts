@@ -1,18 +1,22 @@
 import * as express from 'express'
 import * as bodyParser from 'body-parser'
 
-import routes from './routes/index'
+import orionRoutes from './routes/orion'
+import owntracksRoutes from './routes/orion'
 
-const env = process.env.NODE_ENV || 'development'
-const port = process.env.PORT || 3000
-
+const port = process.env.PORT || 8081
 const app = express()
 
+// For security purposes
+app.disable('x-powered-by')
 app.use(bodyParser.json())
-app.use(routes)
+
+// Routes
+app.use('/api', orionRoutes)
+app.use('/api', owntracksRoutes)
 
 app.get('*', (req, res, next) => {
-  res.status(404).json({ status: 'error', message: `Not Found: ${req.url}` })
+  res.sendStatus(404).json({ status: 'error', message: `Not Found: ${req.url}` })
 })
 
 app.listen(port, () => console.log(`Listening on ::${port}`))

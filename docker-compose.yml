@@ -1,0 +1,50 @@
+version: '3.3'
+
+services:
+  mysql:
+    image: mysql:5.7.23
+    restart: always
+    command: mysqld --sql_mode=""
+    volumes:
+      - mysql:/var/lib/mysql
+    networks:
+      - internal
+    environment:
+      - "MYSQL_RANDOM_ROOT_PASSWORD=1"
+      - "MYSQL_USER=user"
+      - "MYSQL_PASSWORD=password"
+      - "MYSQL_DATABASE=node-orion-server"
+
+  server:
+    depends_on:
+      - mysql
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    networks:
+      - internal
+    ports:
+      - "8081:8081/tcp"
+    environment:
+      - "ORION_CLIENT_HOST=${ORION_CLIENT_HOST}"
+      - "DB_USERNAME=user"
+      - "DB_PASSWORD=password"
+      - "DB_NAME=node-orion-server"
+      - "DB_HOSTNAME=mysql"
+
+   web:
+    restart: always
+    build:
+      context: orion-web
+      args:
+        sha: 8c18dce19a2199c4c53e1145881d362a05018cd5
+        mapbox_api_token: ${MAPBOX_API_TOKEN}
+        orion_server_url: ${ORION_SERVER_URL}
+    depends_on:
+      - server
+
+networks:
+  internal: {}
+
+volumes:
+  mysql: {}

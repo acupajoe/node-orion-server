@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       timestamp: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DATE
       },
       user: {
         index: true,
@@ -28,6 +28,18 @@ module.exports = {
       accuracy: {
         type: Sequelize.INTEGER
       },
+      altitude: {
+        type: Sequelize.INTEGER
+      },
+      verticalAccuracy: {
+        type: Sequelize.INTEGER
+      },
+      velocity: {
+        type: Sequelize.INTEGER
+      },
+      courseOverGround: {
+        type: Sequelize.INTEGER
+      },
       battery: {
         type: Sequelize.INTEGER
       },
@@ -42,6 +54,9 @@ module.exports = {
       },
       address: {
         type: Sequelize.STRING(256)
+      },
+      regions: {
+        type: Sequelize.STRING
       }
     });
   },

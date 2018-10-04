@@ -3,9 +3,8 @@ import locationFactory from "./location"
 
 const env = process.env.NODE_ENV || "development"
 const config = require('../config')[env]
-const url = config.url || process.env.DATABSE_CONNECTION_URI
 
-const sequelize = url ? new Sequelize(url, config) : new Sequelize(config)
+const sequelize = new Sequelize(config)
 
 const db = {
   sequelize,
