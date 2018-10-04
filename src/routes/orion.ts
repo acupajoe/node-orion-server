@@ -12,12 +12,12 @@ const router = Router()
 // MARK: CORS Functionality (Required by Orion)
 const whitelist = []
 
-if (!process.env.ORION_CLIENT_HOST) {
+if (!process.env.ORION_CLIENT_URL) {
   const envPath = path.resolve(__dirname, '..', '..', '.env')
   dotenv.config(envPath)
 }
 
-whitelist.push(process.env.ORION_CLIENT_HOST)
+whitelist.push(process.env.ORION_CLIENT_URL)
 
 const corsOptions = {
   origin: (origin, cb) => {
