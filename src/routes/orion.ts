@@ -17,6 +17,7 @@ if (!process.env.ORION_CLIENT_URL) {
   dotenv.config(envPath)
 }
 
+console.log(`Whitelisting: ${process.env.ORION_CLIENT_URL}`)
 whitelist.push(process.env.ORION_CLIENT_URL)
 
 const corsOptions = {

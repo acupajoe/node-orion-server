@@ -26,6 +26,8 @@ router.post('/publish', async (req, res, next) => {
   const tracker_id = req.body.tid
   const regions = req.body.regions ? req.body.regions.join(',') : null
 
+  console.log(req.body)
+  
   if (type === 'cmd' && action === 'reportLocation')
     return res.send(200)
 
