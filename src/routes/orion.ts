@@ -57,7 +57,7 @@ router.post('/locations', cors(corsOptions), async (req, res, next) => {
   const user: string = req.body.user
   const device: string = req.body.device
   const offset: number = req.body.offset ? parseInt(req.body.offset) : 0
-  const limit: number = req.body.limit ? parseInt(req.body.limit) : 10
+  const limit: number = req.body.limit ? parseInt(req.body.limit) : 2500
   const timestampStart: any = req.body.timestamp_start ? new Date(req.body.timestamp_start * 1000) : moment().subtract(1, 'month').toDate()
   const timestampEnd: any = req.body.timestamp_end ? new Date(req.body.timestamp_end * 1000) : moment().toDate()
 
