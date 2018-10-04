@@ -1,6 +1,7 @@
 {
   "name": "node-orion-server",
   "version": "1.0.0",
+  "author": "Joseph Schultz <joseph@acupajoe.io>",
   "main": "bin/server.js",
   "license": "MIT",
   "scripts": {
